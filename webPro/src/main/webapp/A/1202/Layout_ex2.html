@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+	body {
+		border: 5px solid blue;
+	}
+	* {
+		margin: 3px;
+	}
+		
+	header {
+		background-color: gold;
+		border-radius: 15px;
+		height: 100px;
+		text-align: center;
+	}
+	.s1 {
+		background-color: hotpink;
+		border-radius: 15px;
+		width: calc(30% - 6px);
+		height: 300px;
+		box-sizing: border-box;
+		float: left;
+	}
+	.s2 {
+		background-color: lightgreen;	
+		border-radius: 15px;
+		width: calc(70% - 6px);
+		height: 300px;
+		box-sizing:border-box;
+		float: right;
+	}
+	#sim {
+		border-radius: 15px;
+		width: 150px;
+		height: 150px;
+		margin: 15px;
+	}
+	footer {
+		border-radius: 15px;
+		background-color: lightblue;
+		text-align: center;
+		clear: both;
+	}
+	.s2 div {
+		border: 2px dotted green;
+		background-color: yellow;
+		border-radius: 15px;
+		margin: 7px;
+	}
+	</style>
+	</head>
+	<body>
+		<div>
+			<header class="h1">
+				<h1>My Blog Page</h1>
+				<p>시멘틱 태그로 만들어진 페이지 입니다.</p>
+			</header>
+				
+			<section class="s1">
+				<h2>Link</h2>
+				<ul>
+					<li><a href="../1124/창모/논란.html">W3C</a></li>
+					<li><a href="../1124/창모/논란.html">MOZILLA</a></li>
+					<li><a href="../1124/창모/논란.html">HTML Dogs</a></li>
+				</ul>
+				<img id="sim" src="../images/심바.jfif" alt="심바">	
+					
+			</section>		
+			
+			<section class="s2">
+				<div class="d1">
+					<h2>Semantic Tags</h2> <br>
+					<p>
+					시멘틱 요소(Semantic elements)들을 
+					브라우저에게 요소의 의미나 목적을 명확하게 알려주는 요소이다.
+					레이아웃을 만들때 쓰는 것. 의미가 있는 요소라면 div 보다는 시멘틱 태그를 사용해준다.
+					</p>
+				</div>
+				
+				<div class="d2">
+					<h3>div와 span</h3> <br>
+					<p>
+					div은 "divide"의 약자로서 페이지를 논리적인 섹션으로 분리하는데 사용되는 태그이다.
+					span 요소는 인라인 요소로서 텍스트를 위한 컨테이너로 사용할 수 있다.
+					</p>
+				</div>
+			</section>
+
+			<footer>Copyright (c) 2013 Sim</footer>
+		
+		
+		</div>
+	</body>
+</html>

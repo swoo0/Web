@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+	div {
+		border-radius: 5px;
+		margin: 2px;
+		padding: 5px;
+		border: 1px solid black;
+		/* 지정한 컨텐츠 사이즈에 패딩과 보더 값을 포함 시키는 속성 */
+		box-sizing: border-box;
+	}
+	#hd header {
+		background-color: yellow;	
+		height: 40px;
+	}
+	#nv nav {
+		background-color: red;	
+		width: calc(30% - 4px);
+		height: 200px;
+		float: left;
+	}
+	#ct content {
+		background-color: green;	
+		width: calc(70% - 4px);
+		height: 200px;
+		float: right;
+	}
+	#ft footer {
+		background-color: violet;	
+		height: 40px;
+		clear: both;
+	}
+	</style>
+	</head>
+	<body>
+		<div id="hd">header</div>		
+		<div id="nv">nav</div>		
+		<div id="ct">content</div>		
+		<div id="ft">footer</div>		
+		<hr>
+		<header class="z">header</header>
+		<nav class="z">nav</nav>
+		<article class="z">content</article>
+		<footer class="z">footer</footer>
+	</body>
+</html>

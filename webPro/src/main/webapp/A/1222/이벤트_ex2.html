@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+		img {
+			width: 50px;
+			height: 50px;
+		}
+	</style>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			let s = "";
+			$('img').on('moueseover', function(){
+				s = $(this).attr('src');
+				let s2 = $(this).attr('src2');
+				$(this).attr('src', s2);
+			});
+			$('img').on('mouseout', function(){
+				$(this).attr('src', s);
+			});
+			// 더블클릭시 이미지 사라짐
+			$('img').on('dbclick', function(){
+				$(this).hide();
+				// 이미지 모두 사라졌을때 버튼 보이기
+				if($('img:visible').length < 1) $('#sh');
+			});
+			
+		});	
+	
+	</script>
+	</head>
+	<body>
+		<div class="box" id="d1">
+			<img src="../images/국화.jpg" src2="../images/호랭이.jfif">
+			<img src="../images/사막.jpg" src2="../images/심바.jfif">
+			<img src="../images/대나무숲.jpg" src2="../images/flex.jpg">
+			<img src="../images/Tulips.jpg" src2="../images/아무노래.jpg">
+			<img src="../images/수국.jpg" src2="../images/Rainy day.jpg">
+		</div>
+	</body>
+</html>

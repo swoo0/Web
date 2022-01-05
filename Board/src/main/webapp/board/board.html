@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script src="../js/jquery-3.6.0.min.js"></script>
+<!-- bootstrap.js가 jquery.js보다 하위에 배치하도록 한다. -->
+<!-- modal관련 함수 적용시 오류를 방지하기 위함 -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/board.js"></script>
+<script>
+	$(function(){
+		
+		// 리스트출력 메소드 호출
+		// 기본 페이지를 지정 (1page)
+		listServer(1);
+		
+		// 글쓰기 버튼
+		$('#wrt').on('click', function(){
+// 			$('#myModal').modal('show');
+// 			$('#myModal').modal({backdrop : true});
+// 			$('#myModal').modal({backdrop : false});
+			$('#myModal').modal({backdrop : 'static'});
+		});
+	});
+</script>
+
+<style>
+	#send {
+		margin-left: 500px;
+	}
+</style>
+
+
+</head>
+<body>
+
+	<h4>Accordion 게시판</h4>
+
+	<!-- 글쓰기버튼 영역 -->
+
+	<div>
+		<input type="button" value="글쓰기" id="wrt" class="btn btn-basic">
+	</div>
+
+	<!-- 리스트출력 영역 -->
+
+	<div id="list"></div>
+
+	<!-- 페이징 영역 -->
+
+	<div id="pagelist"></div>
+
+
+	<!-- modal 영역 -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">게시글 등록</h4>
+				</div>
+				<div class="modal-body" >
+				
+					<form>
+						<div class="form-group">
+							<label class="control-label col-sm-2">이름</label>
+							<div class="col-sm-4">
+								<input name="writer" class="form-control"> <br>
+							</div>
+							<label class="control-label col-sm-2">비밀번호</label>
+							<div class="col-sm-4">
+								<input name="password" class="form-control"> <br>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2">제목</label>
+							<div class="col-sm-10">
+								<input name="title" class="form-control"> <br>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2">메일</label>
+							<div class="col-sm-10">
+								<input name="mail" class="form-control"> <br>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2">내용</label>
+							<div class="col-sm-10">
+								<textarea rows="5" cols="50" name="content" class="form-control"></textarea> <br>
+							</div>
+						</div>
+							
+						<input type="button" class="btn btn-success" value="전송" id="send">
+						
+					</form>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

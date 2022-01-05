@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+	.td1 {
+		word-break: break-all;
+	}
+	.td2 {
+		word-break: keep-all;	
+	}
+	.td3 {
+		word-break: keep-all;
+		text-align: justify;
+	}
+	#tr1 {
+		font-weight: boldd;
+		font-size: 1.2em;
+	}
+	</style>
+	</head>
+	<body>
+		<pre>
+		word-break : 텍스트의 줄 바뀜 스타일을 결정하는 속성
+		- break-all : 문자(글자) 단위 줄 바꿈
+		- keep-all : 단어 단위 줄 바꿈
+		</pre>
+		
+		<table>
+			<tr id="tr1">
+				<td class="td1">word-break : break-all(글자 단위 자름)</td>
+				<td class="td2">word-break : keep=all(단어 단위 자름)</td>
+				<td class="td3">
+					word-break : keep-all (단어 단위 자름) <br>
+					text-align:justify(양쪽정렬)
+				</td>
+			</tr>
+			<tr>
+				<td class="td1">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세.</td>
+				<td class="td2">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세.</td>
+				<td class="td3">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세.</td>
+			</tr>
+			<tr>
+				<td class="td1">비가 오길 기다려 본 적은 처음이야</td>
+				<td class="td2">떨어지는 소린 노크 같아 처음이야</td>
+				<td class="td3">네가 내 하루에 들어와서 다행이야</td>
+				<td class="td4">uh, u are the reason why I'm waitin on that rainy time</td>
+			</tr>
+			
+		</table>
+		
+	</body>
+</html>

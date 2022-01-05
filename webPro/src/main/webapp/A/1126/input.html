@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+ 	pre {
+ 		background: lightblue;
+	}
+	input[type="image"] {
+		width: 90px;
+	}
+	</style>
+	<script>
+	function send() {
+// 		window.alert("떴냐?"); // 경고창, 알림창
+// 		alert("최상위객체(window)는 생략가능");
+
+		// id에 해당하는 영역을 변수로 담아 submit처리
+		var frm = document.getElementbyId("frm");
+		frm.submit();
+	}
+	</script>
+	</head>
+	<body>
+		<pre>
+			<h4>get방식으로 서버 페이지에 요청 데이터 보냄</h4>
+			url주소 뒤에 queryString으로 입력값이 표시 된다.
+		</pre>
+		<form action="test.jsp" method="get">
+<!-- 			input 요소의 default는 text이므로 생략 가능 -->
+<!-- 			아이디<input type="text"> -->
+			ID<input name="id"><br>
+			PW<input type="password" name="pw"><br>
+			
+			<input type="submit" value="submit">
+			<input type="reset">
+		</form>
+
+		<br>
+
+		<pre>
+			<h4>post방식으로 서버 페이지에 요청 데이터 보냄</h4>
+			 request header 입력데이터를 담아 보낸다.
+		</pre>
+		<form action="test.jsp" method="post">
+<!-- 			input 요소의 default는 text이므로 생략 가능 -->
+<!-- 			아이디<input type="text"> -->
+			ID<input name="id"><br>
+			PW<input type="password" name="pw"><br>
+			
+			<input type="submit" value="submit">
+			<input type="reset">
+		</form>
+<!-- 		method의 dafalut = get이라서 생략가능 -->
+
+		<pre>
+			<h4>input type=button에 기능 부여하여 서버 페이지에 요청 데이터 보냄</h4>
+		</pre>
+		
+		<form id="frm" action="test.jsp" method="post">
+			ID<input name="id"><br>
+			PW<input type="password" name="pw"><br>
+			<input type="button" value="전송" onclick="send()">
+			<input type="reset">
+		</form>
+	
+		<pre>
+			<h4>input type=image로 서버 페이지에 요청 데이터 보냄</h4>
+		</pre>
+		
+		<form id="frm" action="test.jsp" method="post">
+			ID<input name="id"><br>
+			PW<input type="password" name="pw"><br>
+			<input type="image" src="../images/돈 벌 시간 2.jfif">
+			<input type="reset">
+		</form>
+	</body>
+</html>

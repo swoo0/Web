@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+		th {
+			width: 140px;
+			height: 30px;
+		}
+		#details {
+			width: 300px;
+			
+		}
+	</style>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	</head>
+	<body>
+		
+		<div class="box">
+			<table border="1">
+				<th>거래처 이름</th>
+				<th>거래처 상세정보</th>
+				<tr>
+					<td id="names"></td>
+					<td id="datails"></td>
+				</tr>
+			</table>
+		</div>
+		<script>
+			// ajax단축 - $.get(url, data, success, dataType)
+			$.get(
+				'buyNames.jsp',
+				function(){},
+				'json'
+			);
+			
+		
+		</script>
+	</body>
+</html>

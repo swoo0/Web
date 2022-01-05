@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.backColor {
+  background-color: green;
+  color: red;
+}
+</style>
+<link rel="stylesheet" href="../css/outStyle.css">
+<script src="../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h4>
+  	p요소의 부모가 div인지 비교하여 참일때 스타일 적용 <br>
+  	is() : 값을 비교하여 boolean값을 반환
+  </h4>
+  <div class="box" id="d1">
+    <div>
+      <p>부모(div)있는 p</p>
+    </div>
+    <p>부모 없는 p</p>
+    <div>
+      <p>부모(div)있는 p</p>
+    </div>
+    <form id="frm">
+      <p>부모(form)있는 p</p>
+    </form>
+  </div>
+<script>
+$('#d1 p').on('click',function(){
+	//console.log($(this).parent().is('#d1 div'));
+	if($(this).parent().is('#d1 div')){
+		$(this).parent().addClass('backColor');
+	}else{
+		alert("대상요소가 아님 / 부모는 " 
+				+ $(this).parent().prop('tagName') + "요소"
+				+ " id=" + $(this).parent().attr('id'));
+	}
+});
+</script>
+</body>
+</html>

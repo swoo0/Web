@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+	div {
+		border: 1px solid gray;
+		width: 100px;
+		height: 50px;
+ 		margin: 10px;
+		padding: 10px;
+	}
+	body {
+		outline: 1px solid red;
+	}
+	#d0 {
+		/* static은 위치 속성에 영향을 받지 않음 */
+		background-image: linear-gradient(45deg, yellow, white, red);
+		position: static;
+		top: 100;
+		left: 100px;
+	}
+	#d1 {
+		background-image: radial-gradient(skyblue, white, blue);
+		position: relative;
+		top: 90px;
+		left: 150px;
+	}
+	#d2 {
+		/* 부모가 static 일때 컨테이너의 원점을 기준으로 배치 */
+		background-image: conic-gradient(from 0deg, red, orange, yellow, green, blue, purple);
+		position: absolute;
+		top: 10px;
+		left: 350px;
+	}
+	#d3 {
+		background-image: repeating-linear-gradient(45deg, red 0px, red 2px, blue 2px, blue 10px);
+		position: relative;
+		top: 0px;
+		left: 0px;	
+	}
+	#d4 {
+		/* 부모 id=d3을 기준으로 배치 */	
+		/* 부모를 기준 top & left가 0px 이면 부모와 겹침.(margin 값이 있다면 그만큼 벌어짐.) */
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+	#d5 {
+		position: fixed;
+		bottom: 350px;
+		left: 300px;
+		
+	</style>
+	</head>
+	<body>
+		<h4>정적위치(static) : 정상적인 흐름으로 배치</h4>
+		<div>static1</div>
+		<div id="d0">static2</div>
+		<hr>
+
+		<h4>상대위치(relative) : 정적위치를 기준으로 배치</h4>
+		<div id="d1">relative1</div>
+		<div>relative2</div>
+		<hr>
+
+		<h4>
+			절대위치(absolute) : 특정 부모를 기준으로 절대 위치로 이동 <br>
+			부모는 relative, absolute, fixed 중 하나의 값이 지정 되어야 하며, <br>
+			부모가 static일 경우 컨테이너를 기준으로 한다.
+		</h4>
+		<div>absolute1</div>
+		<div id="d2">absolute2</div>
+		<div id="d3">absolute3
+			<div id="d4">absolute4</div>
+		</div>
+		<hr>
+
+		<h4>고정위치(fixed) : 컨테이너(윈도우)의 원점을 기준으로 배치</h4>	
+		<div id="d5">fixed1</div>
+		<div>fixed2</div>
+		<hr>
+	</body>
+</html>

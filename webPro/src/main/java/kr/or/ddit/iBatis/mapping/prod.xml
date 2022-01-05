@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="prod">
+
+	<!-- 넘겨주는 parameter 값이 하나일 경우 매핑되는 값의 이름이 컬럼명과 달라도 된다. -->
+	<select id="prodNames" resultClass="prodVO" parameterClass="String">
+		SELECT PROD_ID, PROD_NAME FROM PROD WHERE PROD_LGU = #prod_lgu# 
+	</select>
+
+	<select id="prodDetails" resultClass="prodVO" parameterClass="String">
+		SELECT * FROM PROD WHERE PROD_ID = #prod_id#
+	</select>
+
+
+</sqlMap>

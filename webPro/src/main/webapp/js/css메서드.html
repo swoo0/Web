@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+		img {
+			width: 120px;
+			height: 120px;
+		}
+		.pColor {
+			color: blue;
+		}
+		.pBack {
+			background-color: yellow;
+		}
+		.pBack1 {
+		  background-color: purple;
+		}
+		.pBack2 {
+		  background-color: teal;
+		}
+		.borderBlue {
+		  border: 2px solid blue;
+		  border-radius: 50%;
+		}
+		.borderRed {
+		  border: 2px solid red;
+		  border-radius: 50%;
+		}
+	</style>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function() {
+			$('#btn').on('click', function(){
+// 				$('p').css('color', 'red');
+				$('p').addClass('pColor');
+			});
+			
+			$('p').on('click', function(){
+				$(this).addClass('pBack');
+			});
+			
+			
+			
+		});
+	</script>
+	
+	</head>
+	<body>
+		<div class="box">
+			<input type="button" id="btn" value="확인">
+			
+			<p>Click!!</p>
+			<p>Click!!</p>
+			<p>Click!!</p>
+			<p>Click!!</p>
+			<p>Click!!</p>
+			
+			<div></div>
+			
+			<img src="../images/호랭이.jfif" alt="호랭이">
+			<img src="../images/아무노래.jpg" alt="아무노래">
+			<img src="../images/flex.jpg" alt="FLEX">
+			<img src="../images/심바.jfif" alt="사자">
+			<img src="../images/Rainy day.jpg" alt="비오는날">
+			
+		</div>
+	</body>
+</html>

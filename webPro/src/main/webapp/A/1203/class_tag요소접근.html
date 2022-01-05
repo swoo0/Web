@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/outStyle.css">
+	<style>
+		div {
+			border: 1px dotted black;
+			margin: 10px;
+			padding: 10px;
+			width: 500px;
+			height: auto;
+		}
+		p {
+			border: 1px dashed gray;
+		}
+	</style>
+	<script>
+		function getCN() {
+			let a = document.getElementsByClassName('p')[2];			
+			alert(a.length);  // 배열에 대한 길이를 체크해주는 length
+			a.style.color = "red";  // 요소 하나를 특정해서 스타일을 부여해야 한다.
+			
+			// 여러 요소에 스타일을 부여할 때 for문 사용
+			let arr1 = document.getElementsByClassName('p');
+			for(i = 0; i < arr1.length; i++) {
+				arr1[i].style.border = "3px solid orange";
+				
+// 			let b = document.getElementsByClassName('d')[2];
+// 			b.style.color = "lightblue";
+			
+// 			let arr2 = document.getElementsByClassName('d');
+// 			for (i = 0; i < arr2.length; i++) {
+// 				arr2[i].style.border = "3px solid blue";
+			}
+		}
+			
+		function getTN() {
+			let a = document.getElementsByTagName('div');
+// 			let a = document.querySelector('div')[2];
+// 			a.style.color = "green";
+			
+			let arr = document.getElementsByTagName('div');
+// 			let arr = document.querySelectorAll('div');
+			for (i = 0; i < arr.length; i++) {
+				arr[i].style.border = "3px solid blue";	
+			}
+		}
+		
+	</script>
+	</head>
+	<body>
+		<pre>
+			getElementsByClassName('클래스명')[n];
+			getElementsByTagName('요소/태크명')[n];
+			클래스와 요소(태크)는 여러개가 검색될 수 있음(=Elements);
+			
+			querySelector('#id' 또는 '.클래스명' 또는 '태크명')
+			ES6에서 나온 new버전
+			ES2에서 나온 getElementById()가 더 효율적
+		</pre>
+		
+		<div class="d">첫번째 div1
+			<p class="p">첫번째 p1</p>
+			<p class="p">p2</p>
+			<p class="p">p3</p>
+			<p class="p">p4</p>
+		</div>
+	
+		<div class="d">div2</div>
+		<div class="d">div3</div>
+		<div class="d">div4</div>
+		
+		<input type="button" value="getElementsByClassName" onclick="getCN()">		
+		<input type="button" value="getElementsByTagName" onclick="getTN()">		
+		
+		
+	</body>
+</html>
