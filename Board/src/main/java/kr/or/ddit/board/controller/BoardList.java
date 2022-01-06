@@ -1,6 +1,9 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
+import kr.or.ddit.board.vo.BoardVO;
 
 @WebServlet("/List")
 public class BoardList extends HttpServlet {
@@ -57,7 +61,7 @@ public class BoardList extends HttpServlet {
 		/* 페이지 별 게시글의 끝(end) 값
 			[공식] 끝 값 구하기 : start + perList - 1 
 			[예시] sPage가 1일 때 : 1 + 5 - 1 = 5
-					   	   2일 때 : 6 + 5 - 1 = 10
+					   	   2일 때 : 6 + 5 - 1 = 1
 					       3일 때 : 11 + 5 - 1 = 15
 					   	   4일 때 : 16 + 5 - 1 = 20
 			end 값이 count 값보다 크게 계산 되었을 경우, count값을 end 값에 대입한다. */
@@ -75,11 +79,25 @@ public class BoardList extends HttpServlet {
 							4일 때 : ((4 - 1) / 2 * 2) + 1 = 4 */
 		int startPage = ((sPage - 1) / perPage * perPage) + 1;
 		
+		/* 
+		[공식] startPage + perPage - 1; 
+		[예시] sPage 1, 2일 때 : 1 + 2 - 1 = 2;
+		[예시] sPage 3, 4일 때 : 3 + 2 - 1 = 4; */
+		int endPage = startPage + perPage - 1;
+
+		// 객체 접근하여 메소드 호출하고 결과 값 (리스트 데이터) 받기 -
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
 		
-		// 객체 접근하여 메소드 호출하고 결과 값 받기
-		
+		List<BoardVO> list = boardService.boardList(map);
 		
 		// request에 저장하고 jsp로 포워딩
+		req.setAttribute("list", list);
+		req.setAttribute("sPage", startPage);
+		req.setAttribute("ePage", endPage);
+		req.setAttribute("ttPage", totalPage);
+		
 		req.getRequestDispatcher("/board/list.jsp").forward(req, resp);
 		
 		

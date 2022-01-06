@@ -10,11 +10,18 @@
 	
 	</select>
 
-
-
-
-
-
+	<select id="boardList" resultClass="boardVO" parameterClass="map">
+	
+		select a.* from ( 
+            select rownum as rnum, b.* from (
+                  select * from board
+                   order by num desc) b
+<!--    조건식에 사용되는 기호를 태그로 인식하지 않고 문자 그대로 인식하도록하는 문자 데이터 -->
+        	 <![CDATA[
+             where rownum <= #end#) a
+     	     where a.rnum >= #start#
+			 ]]> 
+	</select>
 
 
 

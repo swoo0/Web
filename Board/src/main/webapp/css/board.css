@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+p {
+	padding: 5px;
+	margin: 10px;
+}
+
+.p1 {
+	float: left;
+	width: calc(65% - 20px);
+}
+
+.p2 {
+	float: right;
+	width: calc(35% - 20px);
+	text-align: right;
+}
+
+.p3 {
+	clear: both;
+}
+
+.pager {
+	float: left;
+	margin: 5px;
+}
