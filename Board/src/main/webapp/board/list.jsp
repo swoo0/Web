@@ -25,7 +25,17 @@
 					"subject"	: "<%=vo.getSubject() %>",
 					"writer"	: "<%=vo.getWriter() %>",
 					"mail"		: "<%=vo.getMail() %>",
-					"content"	: "<%=vo.getContent() %>",
+<%
+					if (vo.getContent() != null) {
+%>					
+						"content"	: "<%=vo.getContent().replace("/\r\n/g", "<br>") %>",
+<%
+					} else {
+%>						
+						"content"	: "",											
+<%						
+					}
+%>						
 					"hit"		: "<%=vo.getHit() %>",
 					"wdate"		: "<%=vo.getWdate() %>"
 				}

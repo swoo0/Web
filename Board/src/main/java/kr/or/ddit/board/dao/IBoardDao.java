@@ -20,7 +20,12 @@ public interface IBoardDao {
 	 */
 	public List<BoardVO> boardList(Map<String, Integer> map) throws SQLException;
 
-
+	/**
+	 * 게시글 저장
+	 * @param vo
+	 * @return insert 성공하면 1 이상 반환
+	 */
+	public int insertBoard(BoardVO vo) throws SQLException;
 
 
 

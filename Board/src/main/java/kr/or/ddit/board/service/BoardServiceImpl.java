@@ -49,5 +49,17 @@ public class BoardServiceImpl implements IBoardService {
 		}
 		return list;
 	}
+
+	@Override
+	public int insertBoard(BoardVO vo) {
+		int seq = 0;
+		
+		try {
+			seq = boardDao.insertBoard(vo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return seq;
+	}
 	
 }

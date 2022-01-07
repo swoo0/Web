@@ -24,3 +24,7 @@ p {
 	float: left;
 	margin: 5px;
 }
+#wrt {
+	position: relatice;
+	left: 90%;
+}

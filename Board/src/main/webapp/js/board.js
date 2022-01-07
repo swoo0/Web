@@ -31,6 +31,14 @@ listServer = function(page) {
 				code += '        <input type="button" value="삭제" class="btn btn-danger btn-xs">';
 				code += '      </p>';
 				code += '      <p class="p3">' + this.content + '</p>';
+				
+				// 댓글 start
+				code += '      <p class="p4">';
+				code += '      <textarea cols="100" rows="4"></textarea>';
+				code += '        <input idx="' + this.num + '" type="button" value="등록" name="reply" class="action btn btn-primary btn-sm">';
+				code += '      </p>';
+				// 댓글 end
+				
 				code += '    </div>';
 				code += '  </div>';
 				code += '</div>';
@@ -52,7 +60,12 @@ listServer = function(page) {
 			// 페이지 번호 출력
 				pager += '	<ul class="pagination pager">';
 			for(let i = res.sp; i <= res.ep; i++) {
-				pager += '		<li><a href="#" class="paging">' + i + '</a></li>';
+				// 현재 페이지 확인
+				if (currentPage == i) {
+					pager += '	<li class="active"><a href="#" class="paging">' + i + '</a></li>';
+				} else {
+					pager += '	<li><a href="#" class="paging">' + i + '</a></li>';
+				}
 			}			
 				pager += '	</ul>';
 				
@@ -75,14 +88,51 @@ listServer = function(page) {
 
 $(function(){
 	// 동적생성요소 - delegate방식으로 접근
-	$('pagelist').on('click', '.next', function() {
-		// next 클릭했을 때 현재 페이지 기준으로 끝 값을 확인해서 처리
-		$('.paging')
+		$('#pagelist').on('click', '.prev', function() {
+		// prev 클릭했을 때 현재 페이지 기준으로 끝 값을 확인해서 처리
+		let vprev = $('.paging').first().text();
+		currentPage = parseInt(vprev) - 1;
+		listServer(currentPage);
 	});
+	
+	// 번호 버튼 이벤트
+	$('#pagelist').on('click', '.paging', function() {
+		currentPage = $(this).text();
+		listServer(currentPage);
+	});
+	
+	$('#pagelist').on('click', '.next', function() {
+		// next 클릭했을 때 현재 페이지 기준으로 끝 값을 확인해서 처리
+		let vnext = $('.paging').last().text();
+		currentPage = parseInt(vnext) + 1;
+		listServer(currentPage);
+	});
+
 });
 
 
-
+// 게시글 저장
+writeServer = function() {
+	$.ajax({
+		url     : '/Board/Write',
+		type	: 'post',
+		data	: $('form').serialize(),
+		success	: function(res){
+			if (res.code == "ok") {
+				alert("게시글이 등록되었습니다.");
+				$('#myModal').modal('hide');
+				$('.txt').val("");
+				
+			} else {
+				alert("게시글이 등록이 실패했습니다.");
+			}
+		},
+		error	: function(xhr) {
+			alert(xhr.status);
+		},
+		dataType :	'json'
+	});
+}
 
 
 

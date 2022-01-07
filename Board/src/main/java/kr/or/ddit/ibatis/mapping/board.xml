@@ -23,7 +23,29 @@
 			 ]]> 
 	</select>
 
-
+	<insert id="insertBoard" parameterClass="boardVO">
+		<!-- 
+			관계형 데이터 베이스에서 지원하는 시퀀스를 활용해
+			insert시 추가한 데이터의 기본키를 반환한다
+		-->
+		<selectKey keyProperty="num" resultClass="int">
+			select board_num_seq.nextval from dual
+		</selectKey>
+	
+		insert into board
+		values(
+			#num#,
+			#subject#,
+			#writer#,
+			#mail#,
+			#password#,
+			#content#,
+			0,
+			#wip#,
+			sysdate
+		)	
+	
+	</insert>
 
 
 </sqlMap>
