@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/board.css">
+
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/board.js"></script>
+<script>
+
+let currentPage = 1;
+let boardNum = "";
+let vidx = "";
+let modifyCont = "";
+
+$(function(){
+	
+	listServer(1);
+	
+	//글쓰기 버튼
+	$('#wrt').on('click', function(){
+		$('#wModal').modal('show');
+	})
+	
+	//글 입력 후 전송
+	$('#send').on('click', function(){
+		//게시글 저장
+		writeServer();
+		
+		//새로운 창 받기
+		/* $('#wModal').modal('hide');
+		$('.txt').val(""); */
+	})
+	
+	//모달창 닫기 이벤트
+	/* $('#wModal').on('hide.bs.modal',function(){
+		$('.txt').val("");
+	}); */
+	
+	
+	//버튼 이벤트 - 수정, 삭제, 댓글 등록, 댓글수정, 댓글삭제 - 동적으로 생성된 요소
+	$('#list').on('click','.action', function(){
+		
+		vname = $(this).attr('name');
+		vidx = $(this).attr('idx');
+		
+		//댓글 등록
+		if(vname == 'reply'){
+			
+			//댓글 작성자 이름 임의생성
+			 //fromCharCode : 아스키코드번호를 받아 문자열을 구성해주는 함수
+			 //ASCII : 미국 표준 정보교환 코드로 컴퓨터 내부에서 문자를 표현하는데 사용
+			vname1 = String.fromCharCode( Math.random() * 26 + 65 );	//대문자
+			vname2 = String.fromCharCode( Math.random() * 26 + 97 );	//소문자
+			vname3 = parseInt( Math.random() * 100 + 1 );	//숫자
+			
+			vcont = $(this).prev().val();	// (this-btn).prev() 버튼 이전 요소 textarea
+			$(this).prev().val("");
+			
+			//객체 선언-동적으로 메소드나 필드를 추가 가능
+			reply={};
+			//객체에 필드 추가
+			reply.bonum = vidx;
+			reply.name = vname1 + vname2 + vname3;
+			reply.cont = vcont;
+			//서버로 전송 - ajax
+			replyServer(this);	// this- btn : 추후 셀렉터로 접근하여 댓글 리스트 출력 및 제거에 활용
+
+		}else if(vname == 'delete'){
+			//게시글 삭제 - 글번호 vidx로 접근
+		}else if(vname == 'modify'){
+			//게시글 수정 - 글번호 vidx로 접근
+		}else if(vname == 'r_modify'){
+			
+			//6.댓글수정폼 상태 확인 후 열려있을 경우 replyReset() 호출
+			if($('#modifyForm').css('display') != "none") replyReset();
+			
+			//댓글 수정 0.댓글수정 폼 영역 생성 및 display none처리
+			//1.댓글 내용 변수에 담기
+			modifyCont = $(this).parents('.rep').find('.cont').html();
+			modifyCont = modifyCont.replace(/<br>/g, "\n");
+			//2.댓글수정폼 영역에 댓글 내용 붙임
+			$('#modifyForm textarea').val(modifyCont);
+			//3.컨텐츠 작성 영역(.cont p3)의 자식요소(text node)만 삭제하고 그 자리에 댓글수정폼 붙임
+			$(this).parents('.rep').find('.cont').empty().append($('#modifyForm'));
+			$('#modifyForm').show();
+			//★A댓글의 수정폼이 열린 상태에서 다른 댓글 B의 댓글수정 버튼을 누르면 A댓글 수정창과 내용이 사라지는 현상 발생
+			
+		}else if(vname == 'r_delete'){
+			//댓글 삭제
+			$(this).parents('.rep').remove();			
+			replyDelete();
+		}
+	});
+	
+	//★수정창과 내용 사라짐 현상 해결하기 - 수정창이 사라질때 원래의 형태로 돌아가기
+	replyReset = function(){
+		
+		let contp3 = $('#modifyForm').parent(); //.cont p3
+		
+		//4.댓글수정폼을 다시 body에 붙여넣고 숨김
+		$('#modifyForm').appendTo('body');
+		$('#modifyForm').hide();
+		//5.댓글 내용을 contp3에 출력
+		modifyCont = modifyCont.replace(/\n/g, "<br>");
+		$(contp3).html(modifyCont);
+	}
+	
+	
+	//리스트 제목 클릭시 댓글 리스트 출력
+	$('#list').on('click', '.list', function(){
+		boardNum = $(this).attr('idx');
+		replyListServer(this);
+	});
+	
+	
+	//댓글수정폼 취소버튼
+	$('#cancel').on('click',function(){
+		replyReset();
+	});
+	
+	
+	//댓글수정폼 확인버튼
+	$('#ok').on('click',function(){
+		
+		//수정내용 가져오기
+		modifyCont = $('#modifyForm textarea').val();
+		//.cont p3 영역 변수에 저장		
+		let contp3 = $('#modifyForm').parent();
+		//댓글 수정창 닫기 - body로 다시 이동하고 감추기
+		$('body').append($('#modifyForm'));
+		$('#modifyForm').hide();
+		//contp3에 수정내용 출력 - <br>로 변환
+		let modi = modifyCont.replace(/\r/g, "").replace(/\n/g, "<br>")
+		$(contp3).html(modi);
+		//reply객체 선언
+		reply = {};
+		reply.renum = vidx;
+		reply.cont = modifyCont;
+		
+		//서버로 보내기
+		replyUpdate();
+	});
+	
+	
+})
+</script>
+</head>
+<body>
+
+<!-- 댓글수정을 위한 폼 -->
+<div id="modifyForm">
+  <textarea rows="5" cols="50"></textarea>
+  <input type="button" id="ok" value="확인">
+  <input type="button" id="cancel" value="취소">
+</div>
+<!-- 댓글수정을 위한 폼 -->
+
+
+<div class="box" id="box1">
+  <h3>Accordion 게시판</h3>
+
+  <div>
+    <input type="button" value=  "글쓰기" id="wrt">
+  </div>
+
+  <div id="list"></div>
+  <br>
+  <div id="pagelist"></div>
+</div>
+
+<!-- modal -->
+<div id="wModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form>
+	      <label>이름</label>
+	      <input type="text" class="txt" name="writer"><br>
+	      <label>제목</label>
+	      <input type="text" class="txt" name="subject"><br>
+	      <label>메일</label>
+	      <input type="text" class="txt" name="mail"><br>
+	      <label>비밀번호</label>
+	      <input type="text" class="txt" name="password"><br>
+	      <label>내용</label><br>
+	      <textarea class="txt" rows="10" cols="50" name="content"></textarea><br>
+	      <input type="button" class="btn btn-success" value="전송" id="send">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal end -->
+
+</body>
+</html>
